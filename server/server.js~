@@ -1,0 +1,100 @@
+'use strict';
+// ----- initialization
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
+var urlencodeParser = bodyParser.urlencoded({ extended:false});
+var mongoose = require('mongoose');
+var morgan = require('morgan');
+var Issue = require('./app/models/issue');
+var path = require('path');
+
+
+mongoose.connect('mongodb://127.0.0.1:27017/inia', function(err) {
+    if (err) {
+        console.log('Not connected to database: ' + err);
+    }
+    else {
+        console.log('Successfully connected to MongoDB')
+    }
+});
+
+app.use(express.static('public'));
+app.use(morgan('dev')); // log every request to the console
+
+// ----- Routes
+
+function getIssues(res) {
+  Issue.find(function(err,issues){
+    if(err) {
+      res.json(err);
+    }else {
+      res.json(issues);
+    }
+  });
+};
+
+//create an Issue
+app.post('/create', urlencodeParser,function(req,res){
+    // var response =  req.body;
+    console.log(req.body);
+    // res.end(JSON.stringify(response));
+
+    var response = Issue.create({
+      tracker: req.body.tracker,
+      subject: req.body.subject,
+      status: req.body.status,
+      assignee: req.body.assignee,
+      priority: req.body.priority
+    }, function(err, resp) {
+        if (err){
+          res.end(err);
+        }else{
+          console.log(resp);
+          res.json(resp);
+        }
+    });
+});
+
+// Get all issues
+app.get('/all_issues',urlencodeParser,function(req,res){
+    getIssues(res);
+});
+
+//Edit issue
+app.post('/edit/:issue_id', function (req, res) {
+    Issue.find({_id: req.params.issue_id}, function(err, issue) {
+      if (err){
+        res.send(err);
+      }else{
+        res.json(issue);
+      }
+
+    });
+});
+
+// Delete an issue
+app.delete('/issues/:issue_id', function (req, res) {
+        Issue.remove({
+            _id: req.params.issue_id
+        }, function (err, todo) {
+            if (err)
+                res.send(err);
+
+            getIssues(res);
+        });
+    });
+
+app.get('/',function(req, res){
+  //  res.send('my first node server');
+     // res.sendFile(path.join(__dirname + '/public/app/views/index.html'));
+	res.sendFile('home/sabari/POC/UI/public/app/views/index.html');
+});
+
+// ----- Server
+var server = app.listen(3000, function () {
+
+  var port = server.address().port
+
+  console.log('Example app listening on port 3000! go to http://localhost:%s',  port)
+})

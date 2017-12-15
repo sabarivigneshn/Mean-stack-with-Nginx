@@ -1,0 +1,24 @@
+<h2>Issues</h2>
+<table ng-table="issues" class="table table-bordered table-responsive" >
+  <tr>
+    <th>#</th>
+    <th>Tracker</th>
+    <th>Priority</th>
+    <th>Subject</th>
+    <th>Status</th>
+    <th>Assignee</th>
+    <th>Edit</th>
+    <th>Delete</th>
+
+  </tr>
+  <tr ng-repeat="issue in all_issues">
+    <td>{{issue._id}}</td>
+    <td>{{issue.tracker}}</td>
+    <td>{{issue.priority}}</td>
+    <td>{{issue.subject}}</td>
+    <td>{{issue.status}}</td>
+    <td>{{issue.assignee}}</td>
+    <td><button class="btn btn-primary" ng-click="editIssue(issue._id)">Edit</button></td>
+    <td><button class="btn btn-danger" ng-click="deleteIssue(issue._id)">Delete</button></td>
+  </tr>
+</table>

@@ -1,0 +1,42 @@
+<html>
+<head>
+    <!-- CSS (load bootstrap) -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/1.4.0/css/ngDialog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/1.4.0/css/ngDialog-theme-default.css">
+    <style>
+        .navbar { border-radius:0; }
+    </style>
+
+    <!-- JS (load angular, ui-router, and our custom js file) -->
+    <script src="http://code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/1.4.0/js/ngDialog.js"></script>
+    <script src="/app/app.js"></script>
+    <script src="app/controllers/issueController.js"></script>
+    <script src="app/controllers/tabController.js"></script>
+    <script src="app/controllers/editController.js"></script>
+    <script src="app/services/issueService.js"></script>
+</head>
+
+<body ng-app="app">
+  <!-- NAVIGATION -->
+  <nav class="navbar navbar-inverse" role="navigation">
+      <ul class="nav navbar-nav">
+          <li><a ui-sref="home">Home</a></li>
+          <li><a ui-sref="about">About</a></li>
+          <li><a ui-sref="issues">Issues</a></li>
+          <li><a ui-sref="new">New issue</a></li>
+      </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+      <!-- THIS IS WHERE WE WILL INJECT OUR CONTENT ============================== -->
+      <div ui-view></div>
+  </div>
+
+</body>
+</html>

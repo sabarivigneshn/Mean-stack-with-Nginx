@@ -1,0 +1,45 @@
+<div class='ngdialog-theme-default' ng-controller="editController">
+  <h3>Edit Issue</h3>
+  <form ng-submit="updateIssue(pre_data._id)">
+    <div class="form-group">
+        <label>Tracker:</label>
+        <select name="tracker" ng-model="pre_data.tracker" value=""required>
+            <option value="">
+            <option value="Itops">Itops</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+      <label>Subject:</label>
+      <input type="text" class="form-control" ng-model="pre_data.subject" required>
+    </div>
+
+    <div class="form-group">
+        <label>Status:</label>
+        <select name="status" ng-model="pre_data.status" required>
+          <option value="">
+          <option value="New">New</option>
+          <option value="In progress">In progress</option>
+          <option value="Closed">Closed</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Priority:</label>
+        <select name="priority" ng-model="pre_data.priority" required>
+          <option value="">
+          <option value="Minor impact">Minor impact</option>
+          <option value="Significant impact">Significant impact</option>
+          <option value="Critical impact">Critical impact</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Assignee:</label>
+        <select name="assignee" ng-model="pre_data.assignee" required>
+          <option value="">
+          <option value="sabari">Sabari</option>
+          <option value="viki">viki</option>
+        </select>
+    </div>
+    <input type="submit" name="save" class="btn btn-primary" />
+  </form>
+</div>
